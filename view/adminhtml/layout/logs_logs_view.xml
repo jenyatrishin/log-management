@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">Jentry_LogsManagement::logs_manager</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Jentry\LogsManagement\Block\Adminhtml\View" name="logs.view"
+                   template="Jentry_LogsManagement::view/logs.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

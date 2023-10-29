@@ -1,0 +1,27 @@
+<?php
+/** @var Magento\Framework\Escaper $escaper */
+/** @var Jentry\LogsManagement\Block\Adminhtml\View $block */
+?>
+<section>
+    <div id="logs-element" data-bind="scope:'logs'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#logs-element": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "logs": {
+                            "component": "Jentry_LogsManagement/js/view/reader",
+                            "fileName": "<?= $escaper->escapeHtml($block->getFileName()); ?>",
+                            "linesToShow": "<?= /* @noEscape */ $block->getLinesToShow(); ?>",
+                            "url": "<?= /* @noEscape */ $block->getUrl('logs/logs/reading'); ?>",
+                            "totalLines": "<?= $block->getFileTotalLines(); ?>"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</section>

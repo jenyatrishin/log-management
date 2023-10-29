@@ -1,0 +1,43 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .logs_block {
+        nav {
+            margin-bottom: 15px;
+            ul {
+                display: flex;
+                width: 100%;
+                justify-content: right;
+                align-items: center;
+
+                li {
+                    margin-left: @indent__s;
+                }
+            }
+        }
+
+        .nav_desc {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .logs_data {
+            border: 1px solid #dddddd;
+            padding: @indent__s 0;
+            overflow-x: auto;
+
+            p {
+                background: #ffffff;
+                padding: @indent__s 20px;
+
+                &:nth-child(odd) {
+                    background: #f5f5f5;
+                }
+            }
+        }
+    }
+}
+

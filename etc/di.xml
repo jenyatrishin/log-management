@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Jentry\LogsManagement\Api\FileProviderInterface"
+                type="Jentry\LogsManagement\Model\File\FileProvider" />
+    <preference for="Jentry\LogsManagement\Api\FileReaderInterface"
+                type="Jentry\LogsManagement\Model\FileReader"/>
+    <preference for="Jentry\LogsManagement\Api\ArchiveNameProviderInterface"
+                type="Jentry\LogsManagement\Model\File\ArchiveNameProvider"/>
+    <type name="Jentry\LogsManagement\Model\File\ArchiveNameProvider">
+        <arguments>
+            <argument name="extension" xsi:type="string">tgz</argument>
+        </arguments>
+    </type>
+</config>

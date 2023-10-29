@@ -1,0 +1,35 @@
+{
+    "name": "jentry/module-logs-management",
+    "description": "Magento2 module to view logs from admin interface and archive them by cron",
+    "require": {
+        "magento/framework": ">=103.0.4"
+    },
+    "type": "magento2-module",
+    "version": "0.1.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Yevhenii Trishyn",
+            "email": "jenya.trishin@gmail.com",
+            "homepage": "https://github.com/jenyatrishin",
+            "role": "Software Engineer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "keywords": [
+        "magento 2",
+        "magento 2 logs",
+        "logs",
+        "Log",
+        "log management",
+        "logs management"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Jentry\\LogsManagement\\": ""
+        }
+    }
+}

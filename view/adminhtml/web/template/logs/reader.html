@@ -1,0 +1,21 @@
+
+<div class="logs_block">
+    <nav>
+        <ul>
+            <li><button data-bind="click:prevPage"><</button></li>
+            <li><span data-bind="text: currentPage"></span></li>
+            <li>of</li>
+            <li><span data-bind="text: maxPage"></span></li>
+            <li><button data-bind="click:nextPage"> > </button></li>
+        </ul>
+    </nav>
+    <div class="nav_desc">Lines <span data-bind="text: navDescFirstLine"></span> - <span data-bind="text: navDescLastLine"></span> from <span data-bind="text:total"></span></div>
+
+    <div class="logs_data">
+        <!-- ko foreach: { data: content(), as: 'item' } -->
+        <p class="log_line">
+            <span data-bind="text: item"></span>
+        </p>
+        <!-- /ko -->
+    </div>
+</div>

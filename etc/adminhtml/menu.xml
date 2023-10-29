@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<menu>
+    <add id="Jentry_LogsManagement::logs_manager"
+         title="Logs Management"
+         translate="title"
+         module="Jentry_LogsManagement"
+         parent="Magento_Backend::system_tools"
+         sortOrder="100"
+         resource="Jentry_LogsManagement::logs"
+         action="logs/logs/index"
+    />
+</menu>
+</config>
