@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package   Jentry_LogsManagement
+ * @author    Yevhenii Trishyn
+ * @copyright Copyright (c) Yevhenii Trishyn (https://github.com/jenyatrishin)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License
+ */
+
 declare(strict_types=1);
 
 namespace Jentry\LogsManagement\Model;
@@ -10,7 +17,16 @@ use LimitIterator;
 
 class FileReader implements FileReaderInterface
 {
-    public function readFileByName(string $fileName, int $startLine = 1, int $endLine = 100): array
+    /**
+     * Read file segment by name
+     *
+     * @param string $fileName
+     * @param int $startLine
+     * @param int $endLine
+     *
+     * @return array
+     */
+    public function readFileByName(string $fileName, int $startLine = 0, int $endLine = 100): array
     {
         $output = [];
 

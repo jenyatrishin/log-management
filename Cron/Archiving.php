@@ -1,49 +1,42 @@
 <?php
 
+/**
+ * @package   Jentry_LogsManagement
+ * @author    Yevhenii Trishyn
+ * @copyright Copyright (c) Yevhenii Trishyn (https://github.com/jenyatrishin)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License
+ */
+
 declare(strict_types=1);
 
 namespace Jentry\LogsManagement\Cron;
 
 use Jentry\LogsManagement\Model\ConfigProvider;
-use Jentry\LogsManagement\Api\FileProviderInterface;
-use Magento\Framework\Archive;
-use Magento\Framework\Filesystem\Driver\File;
-use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
+use Jentry\LogsManagement\Model\FileArchiver;
+use Magento\Framework\Exception\FileSystemException;
 
 class Archiving
 {
+    /**
+     * @param ConfigProvider $configProvider
+     * @param FileArchiver $fileArchiver
+     */
     public function __construct(
         private readonly ConfigProvider $configProvider,
-        private readonly FileProviderInterface $fileProvider,
-        private readonly Archive $archive,
-        private readonly File $file,
-        private readonly ArchiveNameProviderInterface $archiveNameProvider
+        private readonly FileArchiver $fileArchiver
     ) {
     }
 
+    /**
+     * Archive log files
+     *
+     * @return void
+     * @throws FileSystemException
+     */
     public function execute(): void
     {
         if ($this->configProvider->isEnabled()) {
-            if (!$this->isArchiveFolderExists()) {
-                $this->createArchiveFolder();
-            }
-            foreach ($this->fileProvider->getFilesList() as $file) {
-                $path = $this->fileProvider->getFilePathByName($file['name']);
-                $newName = $this->archiveNameProvider->buildArchiveName($file['name']);
-
-                $this->archive->pack($path, $this->configProvider->getArchiveFolderPath() . DIRECTORY_SEPARATOR . $newName);
-                $this->file->deleteFile($path);
-            }
+            $this->fileArchiver->archiveLogFiles();
         }
-    }
-
-    private function isArchiveFolderExists(): bool
-    {
-        return $this->file->isExists($this->configProvider->getArchiveFolderPath());
-    }
-
-    private function createArchiveFolder(): void
-    {
-        $this->file->createDirectory($this->configProvider->getArchiveFolderPath());
     }
 }
