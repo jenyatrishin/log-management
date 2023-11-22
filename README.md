@@ -6,6 +6,12 @@ Cron schedule can be configured via admin interface.
 
 # Install
 
+The package could be installed with composer:
+
+```shell
+composer require jentry/module-logs-management
+```
+
 # Config
 
 Please proceed to Stores -> Configuration -> Advanced -> Logs Management
