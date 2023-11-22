@@ -20,6 +20,9 @@ use Jentry\LogsManagement\Model\File\FileProvider;
 use Magento\Framework\Archive;
 use Jentry\LogsManagement\Model\File\ArchiveNameProvider;
 use Magento\Framework\Exception\FileSystemException;
+use DateTime;
+use Psr\Log\NullLogger;
+use Magento\Framework\Filesystem\Io\File as FileDriver;
 
 class FileArchiverTest extends TestCase
 {
@@ -49,7 +52,13 @@ class FileArchiverTest extends TestCase
         ];
         $directoryList = new DirectoryList('/var/www', $customDirs);
         $file = new File();
-        $fileProvider = new FileProvider($directoryList, $file, 'log_test', DirectoryList::SYS_TMP);
+        $fileProvider = new FileProvider(
+            $directoryList,
+            (new NullLogger()),
+            (new FileDriver()),
+            'log_test',
+            DirectoryList::SYS_TMP
+        );
         $archive = new Archive();
         $archiveNameProvider = new ArchiveNameProvider('tgz');
 
@@ -78,7 +87,7 @@ class FileArchiverTest extends TestCase
      */
     public function testArchiveLogFiles(): void
     {
-        $today = (new \DateTime())->format('d-m-Y');
+        $today = (new DateTime())->format('d-m-Y');
         $this->fileArchiver->archiveLogFiles();
         $this->assertDirectoryExists(self::TEST_LOGS_DIRECTORY);
         $this->assertFileExists(

@@ -17,6 +17,8 @@ use Magento\Framework\Filesystem\Driver\File;
 use Jentry\LogsManagement\Api\FileProviderInterface;
 use Jentry\LogsManagement\Model\File\FileProvider;
 use Magento\Framework\Exception\FileSystemException;
+use Psr\Log\NullLogger;
+use Magento\Framework\Filesystem\Io\File as FileDriver;
 
 class FileProviderTest extends TestCase
 {
@@ -53,9 +55,17 @@ class FileProviderTest extends TestCase
             ]
         ];
         $directoryList = new DirectoryList('/var/www', $customDirs);
-
         $this->file = new File();
-        $this->fileProvider = new FileProvider($directoryList, $this->file, 'log_test', DirectoryList::SYS_TMP);
+        $fileDriver = new FileDriver();
+        $logger = new NullLogger();
+
+        $this->fileProvider = new FileProvider(
+            $directoryList,
+            $logger,
+            $fileDriver,
+            'log_test',
+            DirectoryList::SYS_TMP
+        );
         $this->varFolderPath = $directoryList->getPath(DirectoryList::SYS_TMP);
 
         for ($i = 0; $i <= 110; $i++) {

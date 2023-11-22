@@ -17,6 +17,7 @@ use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Io\File as FileDriver;
 use Psr\Log\LoggerInterface;
+use SplFileObject;
 
 class FileProvider implements FileProviderInterface
 {
@@ -96,7 +97,7 @@ class FileProvider implements FileProviderInterface
     public function getFileLinesCount(string $fileName): int
     {
         $filePath = $this->getFilePathByName($fileName);
-        $file = new \SplFileObject($filePath, 'r');
+        $file = new SplFileObject($filePath, 'r');
         $file->seek(PHP_INT_MAX);
 
         return $file->key();

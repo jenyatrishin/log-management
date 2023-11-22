@@ -14,6 +14,7 @@ namespace Jentry\LogsManagement\Test\Unit\Model\File;
 use PHPUnit\Framework\TestCase;
 use Jentry\LogsManagement\Model\File\ArchiveNameProvider;
 use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
+use DateTime;
 
 class ArchiveNameProviderTest extends TestCase
 {
@@ -25,7 +26,7 @@ class ArchiveNameProviderTest extends TestCase
     /**
      * @var ArchiveNameProviderInterface
      */
-    private ArchiveNameProviderInterface $archiveNameZipProvider;
+    private ArchiveNameProviderInterface $zipNameProvider;
 
     /**
      * @return void
@@ -33,7 +34,7 @@ class ArchiveNameProviderTest extends TestCase
     protected function setUp(): void
     {
         $this->archiveNameProvider = new ArchiveNameProvider('tgz');
-        $this->archiveNameZipProvider = new ArchiveNameProvider('zip');
+        $this->zipNameProvider = new ArchiveNameProvider('zip');
     }
 
     /**
@@ -42,12 +43,12 @@ class ArchiveNameProviderTest extends TestCase
     public function testBuildArchiveName(): void
     {
         $this->assertInstanceOf(ArchiveNameProviderInterface::class, $this->archiveNameProvider);
-        $this->assertInstanceOf(ArchiveNameProviderInterface::class, $this->archiveNameZipProvider);
+        $this->assertInstanceOf(ArchiveNameProviderInterface::class, $this->zipNameProvider);
 
         $name = $this->archiveNameProvider->buildArchiveName('own_test');
-        $this->assertEquals('own_test-' . (new \DateTime())->format('d-m-Y') . '.tgz', $name);
+        $this->assertEquals('own_test-' . (new DateTime())->format('d-m-Y') . '.tgz', $name);
 
-        $name = $this->archiveNameZipProvider->buildArchiveName('own_test_zip');
-        $this->assertEquals('own_test_zip-' . (new \DateTime())->format('d-m-Y') . '.zip', $name);
+        $name = $this->zipNameProvider->buildArchiveName('own_test_zip');
+        $this->assertEquals('own_test_zip-' . (new DateTime())->format('d-m-Y') . '.zip', $name);
     }
 }

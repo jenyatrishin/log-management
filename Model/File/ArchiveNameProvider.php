@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Jentry\LogsManagement\Model\File;
 
 use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
+use DateTime;
 
 class ArchiveNameProvider implements ArchiveNameProviderInterface
 {
@@ -34,7 +35,7 @@ class ArchiveNameProvider implements ArchiveNameProviderInterface
      */
     public function buildArchiveName(string $fileName): string
     {
-        $today = (new \DateTime())->format('d-m-Y');
+        $today = (new DateTime())->format('d-m-Y');
 
         return $fileName . '-' . $today . '.' . $this->extension;
     }
