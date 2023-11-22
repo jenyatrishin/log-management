@@ -12,25 +12,31 @@ declare(strict_types=1);
 namespace Jentry\LogsManagement\Model\File;
 
 use Jentry\LogsManagement\Api\FileProviderInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem\DirectoryList;
-use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Filesystem\Io\File as FileDriver;
+use Psr\Log\LoggerInterface;
 
 class FileProvider implements FileProviderInterface
 {
+    // @codingStandardsIgnoreStart
     /**
      * @param DirectoryList $directoryList
-     * @param File $file
+     * @param LoggerInterface $logger
+     * @param FileDriver $fileDriver
      * @param string $folderName
      * @param string $varFolderCode
      */
     public function __construct(
         private readonly DirectoryList $directoryList,
-        private readonly File $file,
+        private readonly LoggerInterface $logger,
+        private readonly FileDriver $fileDriver,
         private readonly string $folderName = 'log',
         private readonly string $varFolderCode = 'var'
     ) {
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Retrieve file path by name
@@ -51,19 +57,32 @@ class FileProvider implements FileProviderInterface
      * Retrieve files list
      *
      * @return array
-     * @throws FileSystemException
      */
     public function getFilesList(): array
     {
-        $path = $this->directoryList->getPath($this->varFolderCode) . DIRECTORY_SEPARATOR . $this->folderName;
-        $paths =  $this->file->readDirectory($path);
+        $output = [];
+        try {
+            $path = $this->directoryList->getPath($this->varFolderCode) . DIRECTORY_SEPARATOR . $this->folderName;
 
-        $files = array_filter(
-            $paths,
-            fn (string $element) => $this->file->isFile($element)
-        );
+            $this->fileDriver->cd($path);
 
-        return $this->prepareFilesData($files);
+            foreach ($this->fileDriver->ls() as $folderElement) {
+                $fileType = $folderElement['filetype'] ?? null;
+                if ($fileType !== 'log') {
+                    continue;
+                }
+                $output[$folderElement['text']] = [
+                    'id' => $folderElement['text'],
+                    'name' => $folderElement['text'],
+                    'size' => $folderElement['size']/pow(1024, 2) . ' MB',
+                    'edited' => $folderElement['mod_date']
+                ];
+            }
+        } catch (LocalizedException $e) {
+            $this->logger->error(__('Retrieve files list error: %1', $e->getMessage()));
+        }
+
+        return $output;
     }
 
     /**
@@ -81,33 +100,5 @@ class FileProvider implements FileProviderInterface
         $file->seek(PHP_INT_MAX);
 
         return $file->key();
-    }
-
-    /**
-     * Prepare files data
-     *
-     * @param array $fileNames
-     *
-     * @return array
-     */
-    private function prepareFilesData(array $fileNames): array
-    {
-        $output = [];
-        foreach ($fileNames as $fileName) {
-            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-            if ($extension !== 'log') {
-                continue;
-            }
-            $pathParts = explode('/', $fileName);
-            $name = $pathParts[count($pathParts) - 1];
-            $output[$name] = [
-                'id' => $name,
-                'name' => $name,
-                'size' => filesize($fileName)/pow(1024, 2) . ' MB',
-                'edited' => date ("F d Y H:i:s.", filemtime($fileName))
-            ];
-        }
-
-        return $output;
     }
 }

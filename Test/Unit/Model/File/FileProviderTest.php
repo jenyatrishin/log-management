@@ -46,7 +46,12 @@ class FileProviderTest extends TestCase
      */
     protected function setUp(): void
     {
-        $customDirs = [DirectoryList::SYS_TMP => [DirectoryList::PATH => '/var/www/var', DirectoryList::URL_PATH => 'var']];
+        $customDirs = [
+            DirectoryList::SYS_TMP => [
+                DirectoryList::PATH => '/var/www/var',
+                DirectoryList::URL_PATH => 'var'
+            ]
+        ];
         $directoryList = new DirectoryList('/var/www', $customDirs);
 
         $this->file = new File();
@@ -68,7 +73,9 @@ class FileProviderTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $this->file->deleteFile($this->varFolderPath . DIRECTORY_SEPARATOR . 'log_test' . DIRECTORY_SEPARATOR . 'test1.log');
+        $this->file->deleteFile(
+            $this->varFolderPath . DIRECTORY_SEPARATOR . 'log_test' . DIRECTORY_SEPARATOR . 'test1.log'
+        );
     }
 
     /**

@@ -44,6 +44,6 @@ class StaticConfigProvider implements ConfigProviderInterface
      */
     public function getFileLinesCount(): int
     {
-       return $this->configValues['lines_count'];
+        return $this->configValues['lines_count'];
     }
 }

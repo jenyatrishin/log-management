@@ -17,6 +17,7 @@ use Magento\Framework\Exception\FileSystemException;
 
 class Archiving
 {
+    // @codingStandardsIgnoreStart
     /**
      * @param ConfigProvider $configProvider
      * @param FileArchiver $fileArchiver
@@ -26,6 +27,7 @@ class Archiving
         private readonly FileArchiver $fileArchiver
     ) {
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Archive log files

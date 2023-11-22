@@ -15,6 +15,7 @@ use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
 
 class ArchiveNameProvider implements ArchiveNameProviderInterface
 {
+    // @codingStandardsIgnoreStart
     /**
      * @param string $extension
      */
@@ -22,6 +23,7 @@ class ArchiveNameProvider implements ArchiveNameProviderInterface
         private readonly string $extension
     ) {
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Create archive name for file

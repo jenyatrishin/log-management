@@ -21,7 +21,7 @@ class Index extends Action implements HttpGetActionInterface
     /**
      * Admin acl resource
      */
-    const ADMIN_RESOURCE = 'Jentry_LogsManagement::logs';
+    public const ADMIN_RESOURCE = 'Jentry_LogsManagement::logs';
 
     /**
      * Render log management page

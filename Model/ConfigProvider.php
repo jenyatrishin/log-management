@@ -23,6 +23,7 @@ class ConfigProvider implements ConfigProviderInterface
     private const XML_PATH_LOGS_MANAGEMENT_CRON_ENABLED = 'logs/logs_cron/enabled';
     private const XML_PATH_LOGS_MANAGEMENT_CRON_SCHEDULE = 'logs/logs_cron/cron_schedule';
 
+    // @codingStandardsIgnoreStart
     /**
      * @param ScopeConfigInterface $scopeConfig
      */
@@ -30,6 +31,7 @@ class ConfigProvider implements ConfigProviderInterface
         private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Check if cron archiving is enabled

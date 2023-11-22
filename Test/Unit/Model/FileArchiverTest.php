@@ -44,7 +44,9 @@ class FileArchiverTest extends TestCase
             'archive_folder_path' => self::TEST_LOGS_DIRECTORY,
             'lines_count' => 100
         ]);
-        $customDirs = [DirectoryList::SYS_TMP => [DirectoryList::PATH => '/var/www/var', DirectoryList::URL_PATH => 'var']];
+        $customDirs = [
+            DirectoryList::SYS_TMP => [DirectoryList::PATH => '/var/www/var', DirectoryList::URL_PATH => 'var']
+        ];
         $directoryList = new DirectoryList('/var/www', $customDirs);
         $file = new File();
         $fileProvider = new FileProvider($directoryList, $file, 'log_test', DirectoryList::SYS_TMP);

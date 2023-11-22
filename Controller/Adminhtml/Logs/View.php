@@ -21,7 +21,7 @@ class View extends Action implements HttpGetActionInterface
     /**
      * Configuration acl resource
      */
-    const ADMIN_RESOURCE = 'Jentry_LogsManagement::logs';
+    public const ADMIN_RESOURCE = 'Jentry_LogsManagement::logs';
 
     /**
      * Render view page

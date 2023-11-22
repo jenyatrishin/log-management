@@ -19,6 +19,7 @@ use Magento\Framework\Exception\FileSystemException;
 
 class FileArchiver
 {
+    // @codingStandardsIgnoreStart
     /**
      * @param ConfigProviderInterface $configProvider
      * @param FileProviderInterface $fileProvider
@@ -34,6 +35,7 @@ class FileArchiver
         private readonly ArchiveNameProviderInterface $archiveNameProvider
     ) {
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Archive and remove log files
