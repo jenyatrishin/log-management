@@ -69,11 +69,12 @@ class FileReaderTest extends TestCase
      */
     public function testReadFileByName(): void
     {
+        /** @var iterable $res */
         $res = $this->fileReader->readFileByName($this->path);
-
+        $firstLine = $res->current();
         $this->assertInstanceOf(FileReaderInterface::class, $this->fileReader);
         $this->assertIsIterable($res);
         $this->assertCount(100, $res);
-        $this->assertEquals(self::LINE_CONTENT, $res[0]);
+        $this->assertEquals(self::LINE_CONTENT, $firstLine);
     }
 }

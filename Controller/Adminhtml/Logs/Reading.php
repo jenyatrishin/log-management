@@ -61,16 +61,15 @@ class Reading extends Action implements HttpPostActionInterface
         $endLine = $linesToShow * $page;
 
         try {
-            $result->setData([
-                'content' => array_map(
-                    fn (string $row) => $this->escaper->escapeHtml($row),
-                    $this->fileReader->readFileByName(
-                        $this->fileProvider->getFilePathByName($fileName),
-                        $startLine,
-                        $endLine
-                    )
-                )
-            ]);
+            $output = [];
+            foreach ($this->fileReader->readFileByName(
+                $this->fileProvider->getFilePathByName($fileName),
+                $startLine,
+                $endLine
+            ) as $row) {
+                $output[] = $this->escaper->escapeHtml($row);
+            }
+            $result->setData(['content' => $output]);
         } catch (FileSystemException $e) {
             $this->logger->error($e->getMessage());
             $result->setData([

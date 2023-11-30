@@ -76,6 +76,16 @@ define([
         setPageDirectly: function (d, e) {
             this.currentPage(e.target.value);
             this.getContentToShow();
+        },
+
+        firstPage: function (d, e) {
+            this.currentPage(1);
+            this.getContentToShow();
+        },
+
+        lastPage: function (d, e) {
+            this.currentPage(this.maxPage);
+            this.getContentToShow();
         }
     });
 

@@ -26,10 +26,8 @@ class FileReader implements FileReaderInterface
      *
      * @return array
      */
-    public function readFileByName(string $fileName, int $startLine = 0, int $endLine = 100): array
+    public function readFileByName(string $fileName, int $startLine = 0, int $endLine = 100): iterable
     {
-        $output = [];
-
         $limit = $endLine - $startLine;
 
         $iter =  new LimitIterator(
@@ -39,9 +37,7 @@ class FileReader implements FileReaderInterface
         );
 
         foreach ($iter as $line) {
-            $output[] = $line;
+            yield $line;
         }
-
-        return $output;
     }
 }

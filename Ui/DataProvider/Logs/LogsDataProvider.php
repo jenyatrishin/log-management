@@ -67,11 +67,12 @@ class LogsDataProvider extends DataProvider
     public function getData(): array
     {
         $files = $this->provider->getFilesList();
+        $filesCount = count($files);
 
         return [
             'items' => array_values($files),
-            'total' => count($files),
-            'totalRecords' => count($files)
+            'total' => $filesCount,
+            'totalRecords' => $filesCount
         ];
     }
 }

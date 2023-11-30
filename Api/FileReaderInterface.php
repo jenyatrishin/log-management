@@ -22,5 +22,5 @@ interface FileReaderInterface
      *
      * @return iterable
      */
-    public function readFileByName(string $fileName, int $startLine = 0, int $endLine = 100): iterable;
+    public function readFileByName(string $fileName, int $startLine, int $endLine): iterable;
 }
