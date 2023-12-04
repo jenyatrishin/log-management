@@ -19,6 +19,7 @@ use Jentry\LogsManagement\Model\File\FileProvider;
 use Magento\Framework\Exception\FileSystemException;
 use Psr\Log\NullLogger;
 use Magento\Framework\Filesystem\Io\File as FileDriver;
+use Magento\Framework\File\Size;
 
 class FileProviderTest extends TestCase
 {
@@ -56,13 +57,12 @@ class FileProviderTest extends TestCase
         ];
         $directoryList = new DirectoryList('/var/www', $customDirs);
         $this->file = new File();
-        $fileDriver = new FileDriver();
-        $logger = new NullLogger();
 
         $this->fileProvider = new FileProvider(
             $directoryList,
-            $logger,
-            $fileDriver,
+            (new NullLogger()),
+            (new FileDriver()),
+            (new Size()),
             'log_test',
             DirectoryList::SYS_TMP
         );

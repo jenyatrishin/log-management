@@ -16,6 +16,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem\Io\File as FileDriver;
+use Magento\Framework\File\Size;
 use Psr\Log\LoggerInterface;
 use SplFileObject;
 
@@ -26,6 +27,7 @@ class FileProvider implements FileProviderInterface
      * @param DirectoryList $directoryList
      * @param LoggerInterface $logger
      * @param FileDriver $fileDriver
+     * @param Size $size
      * @param string $folderName
      * @param string $varFolderCode
      */
@@ -33,6 +35,7 @@ class FileProvider implements FileProviderInterface
         private readonly DirectoryList $directoryList,
         private readonly LoggerInterface $logger,
         private readonly FileDriver $fileDriver,
+        private readonly Size $size,
         private readonly string $folderName = 'log',
         private readonly string $varFolderCode = 'var'
     ) {
@@ -75,7 +78,7 @@ class FileProvider implements FileProviderInterface
                 $output[$folderElement['text']] = [
                     'id' => $folderElement['text'],
                     'name' => $folderElement['text'],
-                    'size' => $folderElement['size']/pow(1024, 2) . ' MB',
+                    'size' => $this->size->getFileSizeInMb($folderElement['size'], 3) . __('MB'),
                     'edited' => $folderElement['mod_date']
                 ];
             }

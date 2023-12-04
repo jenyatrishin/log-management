@@ -23,6 +23,7 @@ use Magento\Framework\Exception\FileSystemException;
 use DateTime;
 use Psr\Log\NullLogger;
 use Magento\Framework\Filesystem\Io\File as FileDriver;
+use Magento\Framework\File\Size;
 
 class FileArchiverTest extends TestCase
 {
@@ -56,6 +57,7 @@ class FileArchiverTest extends TestCase
             $directoryList,
             (new NullLogger()),
             (new FileDriver()),
+            (new Size()),
             'log_test',
             DirectoryList::SYS_TMP
         );
