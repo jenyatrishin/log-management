@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Jentry\LogsManagement\Model;
 
+use Jentry\LogsManagement\Api\ConfigProviderInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class ConfigProvider implements ConfigProviderInterface

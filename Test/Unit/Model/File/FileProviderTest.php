@@ -51,11 +51,11 @@ class FileProviderTest extends TestCase
     {
         $customDirs = [
             DirectoryList::SYS_TMP => [
-                DirectoryList::PATH => '/var/www/var',
+                DirectoryList::PATH => realpath(__DIR__ . '/../../../../../../../../var'),
                 DirectoryList::URL_PATH => 'var'
             ]
         ];
-        $directoryList = new DirectoryList('/var/www', $customDirs);
+        $directoryList = new DirectoryList(realpath(__DIR__ . '/../../../../../../../..'), $customDirs);
         $this->file = new File();
 
         $this->fileProvider = new FileProvider(

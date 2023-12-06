@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace Jentry\LogsManagement\Model;
 
+use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
+use Jentry\LogsManagement\Api\ConfigProviderInterface;
 use Jentry\LogsManagement\Api\FileProviderInterface;
 use Magento\Framework\Archive;
-use Magento\Framework\Filesystem\Driver\File;
-use Jentry\LogsManagement\Api\ArchiveNameProviderInterface;
 use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Filesystem\Driver\File;
 
 class FileArchiver
 {

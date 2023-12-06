@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Jentry\LogsManagement\Test\Unit\Model;
 
-use Jentry\LogsManagement\Model\ConfigProviderInterface;
+use Jentry\LogsManagement\Api\ConfigProviderInterface;
 
 class StaticConfigProvider implements ConfigProviderInterface
 {

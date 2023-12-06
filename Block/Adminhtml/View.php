@@ -16,6 +16,7 @@ use Jentry\LogsManagement\Api\FileProviderInterface;
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Jentry\LogsManagement\Model\ConfigProvider;
+use Magento\Framework\Exception\FileSystemException;
 
 class View extends Template
 {
@@ -62,6 +63,7 @@ class View extends Template
      * Retrieve file lines total count
      *
      * @return int
+     * @throws FileSystemException
      */
     public function getFileTotalLines(): int
     {

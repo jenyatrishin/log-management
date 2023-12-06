@@ -1,11 +1,11 @@
 {
     "name": "jentry/module-logs-management",
-    "description": "Magento2 module to view logs from admin interface and archive them by cron",
+    "description": "Magento2\\Adobe Commerce module to view logs from admin interface and archive them by cron",
     "require": {
         "magento/framework": ">=103.0.4"
     },
     "type": "magento2-module",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "license": "proprietary",
     "authors": [
         {

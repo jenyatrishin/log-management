@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Jentry\LogsManagement\Model;
+namespace Jentry\LogsManagement\Api;
 
 interface ConfigProviderInterface
 {

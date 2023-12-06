@@ -49,9 +49,12 @@ class FileArchiverTest extends TestCase
             'lines_count' => 100
         ]);
         $customDirs = [
-            DirectoryList::SYS_TMP => [DirectoryList::PATH => '/var/www/var', DirectoryList::URL_PATH => 'var']
+            DirectoryList::SYS_TMP => [
+                DirectoryList::PATH => realpath(__DIR__ . '/../../../../../../../var'),
+                DirectoryList::URL_PATH => 'var'
+            ]
         ];
-        $directoryList = new DirectoryList('/var/www', $customDirs);
+        $directoryList = new DirectoryList(realpath(__DIR__ . '/../../../../../../..'), $customDirs);
         $file = new File();
         $fileProvider = new FileProvider(
             $directoryList,
