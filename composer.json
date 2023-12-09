@@ -5,7 +5,7 @@
         "magento/framework": ">=103.0.4"
     },
     "type": "magento2-module",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "license": "proprietary",
     "authors": [
         {
