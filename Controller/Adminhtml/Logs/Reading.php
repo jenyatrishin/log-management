@@ -19,9 +19,9 @@ use Magento\Framework\Controller\ResultFactory;
 use Jentry\LogsManagement\Model\ConfigProvider;
 use Jentry\LogsManagement\Api\FileReaderInterface;
 use Jentry\LogsManagement\Api\FileProviderInterface;
-use Magento\Framework\Exception\FileSystemException;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Escaper;
+use Throwable;
 
 class Reading extends Action implements HttpPostActionInterface
 {
@@ -66,11 +66,11 @@ class Reading extends Action implements HttpPostActionInterface
                 $this->fileProvider->getFilePathByName($fileName),
                 $startLine,
                 $endLine
-            ) as $row) {
-                $output[] = $this->escaper->escapeHtml($row);
+            ) as $fileContentRow) {
+                $output[] = $this->escaper->escapeHtml($fileContentRow);
             }
             $result->setData(['content' => $output]);
-        } catch (FileSystemException $e) {
+        } catch (Throwable $e) {
             $this->logger->error($e->getMessage());
             $result->setData([
                 'content' => __('File can not be read')
