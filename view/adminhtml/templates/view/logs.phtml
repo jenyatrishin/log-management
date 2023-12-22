@@ -24,6 +24,7 @@
                             "fileName": "<?= $escaper->escapeHtml($block->getFileName()); ?>",
                             "linesToShow": "<?= /* @noEscape */ $block->getLinesToShow(); ?>",
                             "url": "<?= $escaper->escapeUrl($block->getUrl('logs/logs/reading')); ?>",
+                            "searchUrl": "<?= $escaper->escapeUrl($block->getUrl('logs/logs/search')); ?>",
                             "totalLines": "<?= /* @noEscape */ $block->getFileTotalLines(); ?>"
                         }
                     }

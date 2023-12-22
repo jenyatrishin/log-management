@@ -6,18 +6,26 @@
 <div class="logs-block">
     <nav>
         <ul>
-            <li><button data-bind="click:firstPage"> << </button></li>
-            <li><button data-bind="click:prevPage"> < </button></li>
-            <li><span data-bind="text: currentPage"></span></li>
-            <li data-bind="i18n:'of'"></li>
-            <li><span data-bind="text: maxPage"></span></li>
-            <li><button data-bind="click:nextPage"> > </button></li>
-            <li><button data-bind="click:lastPage"> >> </button></li>
+            <li>
+                <input class="admin__control-text" type="search" data-bind="value: searchValue">
+                <button data-bind="i18n: 'Search', click: searchHandler"></button>
+            </li>
+        </ul>
+        <ul>
+            <li data-bind="hidden: showSearchResult"><button data-bind="click:firstPage, attr: {disabled: searchValue}"> << </button></li>
+            <li data-bind="hidden: showSearchResult"><button data-bind="click:prevPage, attr: {disabled: searchValue}"> < </button></li>
+            <li data-bind="hidden: showSearchResult"><span data-bind="text: currentPage"></span></li>
+            <li data-bind="i18n:'of', hidden: showSearchResult"></li>
+            <li data-bind="hidden: showSearchResult"><span data-bind="text: maxPage"></span></li>
+            <li data-bind="hidden: showSearchResult"><button data-bind="click:nextPage, attr: {disabled: searchValue}"> > </button></li>
+            <li data-bind="hidden: showSearchResult"><button data-bind="click:lastPage, attr: {disabled: searchValue}"> >> </button></li>
+            <li data-bind="visible: showSearchResult"><button data-bind="i18n: 'Reset Search', click: resetSearchHandler"></button></li>
         </ul>
     </nav>
-    <div class="nav-desc"><span data-bind="i18n:'Lines'"></span>
+    <div class="nav-desc" data-bind="hidden: showSearchResult"><span data-bind="i18n:'Lines'"></span>
         <span data-bind="text: navDescFirstLine"></span> - <span data-bind="text: navDescLastLine"></span>
-        <span data-bind="i18n:'from'"></span> <span data-bind="text:total"></span></div>
+        <span data-bind="i18n:'from'"></span> <span data-bind="text:total"></span>
+    </div>
 
     <div class="logs-data">
         <!-- ko foreach: { data: content(), as: 'item' } -->

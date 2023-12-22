@@ -7,8 +7,10 @@
                 type="Jentry\LogsManagement\Model\FileReader"/>
     <preference for="Jentry\LogsManagement\Api\ArchiveNameProviderInterface"
                 type="Jentry\LogsManagement\Model\File\ArchiveNameProvider"/>
-    <preference for="Jentry\LogsManagement\Model\ConfigProviderInterface"
+    <preference for="Jentry\LogsManagement\Api\ConfigProviderInterface"
                 type="Jentry\LogsManagement\Model\ConfigProvider"/>
+    <preference for="Jentry\LogsManagement\Api\FileSearchInterface"
+                type="Jentry\LogsManagement\Model\FileReader"/>
     <type name="Jentry\LogsManagement\Model\File\ArchiveNameProvider">
         <arguments>
             <argument name="extension" xsi:type="string">tgz</argument>

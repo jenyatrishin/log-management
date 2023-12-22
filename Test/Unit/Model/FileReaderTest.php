@@ -16,6 +16,8 @@ use Magento\Framework\Filesystem\Driver\File;
 use Jentry\LogsManagement\Api\FileReaderInterface;
 use Jentry\LogsManagement\Model\FileReader;
 use Magento\Framework\Exception\FileSystemException;
+use Iterator;
+use Generator;
 
 class FileReaderTest extends TestCase
 {
@@ -23,6 +25,7 @@ class FileReaderTest extends TestCase
      * test log file content string
      */
     private const LINE_CONTENT = 'Test log string' . PHP_EOL;
+    private const SEARCH_LINE_CONTENT = 'log string';
 
     /**
      * @var File
@@ -48,9 +51,10 @@ class FileReaderTest extends TestCase
         $this->fileReader = new FileReader();
         $this->file = new File();
 
-        $this->path = '/var/www/var' . DIRECTORY_SEPARATOR . 'log_test' . DIRECTORY_SEPARATOR . 'test.log';
+        $this->path = realpath(__DIR__ . '/../../../../../../../var')
+             . DIRECTORY_SEPARATOR . 'log_test' . DIRECTORY_SEPARATOR . 'test.log';
 
-        for ($i = 0; $i <= 110; $i++) {
+        for ($i = 0; $i <= 99; $i++) {
             $this->file->filePutContents($this->path, self::LINE_CONTENT, FILE_APPEND);
         }
     }
@@ -69,12 +73,27 @@ class FileReaderTest extends TestCase
      */
     public function testReadFileByName(): void
     {
-        /** @var iterable $res */
+        /** @var iterable|Iterator $res */
         $res = $this->fileReader->readFileByName($this->path);
         $firstLine = $res->current();
         $this->assertInstanceOf(FileReaderInterface::class, $this->fileReader);
+        $this->assertNotEmpty($res);
         $this->assertIsIterable($res);
         $this->assertCount(100, $res);
         $this->assertEquals(self::LINE_CONTENT, $firstLine);
+    }
+
+    /**
+     * @return void
+     */
+    public function testSearch(): void
+    {
+        /** @var iterable|Generator $res */
+        $res = $this->fileReader->search($this->path, self::SEARCH_LINE_CONTENT);
+        $firstLine = $res->current();
+        $this->assertIsIterable($res);
+        $this->assertNotEmpty($res);
+        $this->assertCount(100, iterator_to_array($res, false));
+        $this->assertStringContainsString(self::SEARCH_LINE_CONTENT, $firstLine);
     }
 }

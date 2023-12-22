@@ -24,5 +24,7 @@ There are 2 tabs:
 
 Please proceed to System -> Tools -> Logs Management
 
+<img src="./menu-item.png" alt="Menu">
+
 There is grid with all log files in the /var/log folder. You can view separate file if you'll proceed to
 view file page

@@ -12,10 +12,11 @@ declare(strict_types=1);
 namespace Jentry\LogsManagement\Model;
 
 use Jentry\LogsManagement\Api\FileReaderInterface;
+use Jentry\LogsManagement\Api\FileSearchInterface;
 use SplFileObject;
 use LimitIterator;
 
-class FileReader implements FileReaderInterface
+class FileReader implements FileReaderInterface, FileSearchInterface
 {
     /**
      * Read file segment by name
@@ -38,6 +39,23 @@ class FileReader implements FileReaderInterface
 
         foreach ($iter as $line) {
             yield $line;
+        }
+    }
+
+    /**
+     * Search in file by pattern string
+     *
+     * @param string $fileName
+     * @param string $searchText
+     *
+     * @return iterable
+     */
+    public function search(string $fileName, string $searchText): iterable
+    {
+        foreach ($this->readFileByName($fileName, 0, -1) as $fileLine) {
+            if (stripos($fileLine, $searchText) !== false) {
+                yield $fileLine;
+            }
         }
     }
 }
